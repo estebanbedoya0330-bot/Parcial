@@ -1,18 +1,3 @@
-# Parcial
-# ==============================================================
-# PARCIAL 3 - LÓGICA DE PROGRAMACIÓN
-# Sistema de pedidos de una cafetería universitaria
-#
-# Integrantes del grupo:
-#   - Joan Nicolas Rey Gomez
-#   - (Agregar aquí los nombres de los demás integrantes)
-# ==============================================================
-
-# --------------------------------------------------------------
-# 1. DICCIONARIO Y TUPLAS: catálogo de productos
-#    Clave: código del producto
-#    Valor: tupla (nombre, precio, existencias)
-# --------------------------------------------------------------
 productos = {
     1: ("Cafe", 3000, 20),
     2: ("Jugo natural", 5000, 15),
@@ -28,16 +13,9 @@ productos = {
     12: ("Galletas", 1500, 40)
 }
 
-# --------------------------------------------------------------
-# 3. LISTA para almacenar el pedido
-#    Cada elemento es una tupla: (codigo, nombre, cantidad, subtotal)
-# --------------------------------------------------------------
+
 pedido = []
 
-
-# --------------------------------------------------------------
-# 2. FUNCIÓN PARA MOSTRAR EL CATÁLOGO
-# --------------------------------------------------------------
 def mostrar_productos(productos):
     print("\n========== CATALOGO ==========")
     print("Codigo  Producto          Precio    Existencias")
@@ -50,53 +28,44 @@ def mostrar_productos(productos):
     print("----------------------------------------------")
 
 
-# --------------------------------------------------------------
-# 4. FUNCIÓN PARA REGISTRAR PRODUCTOS
-# --------------------------------------------------------------
+
 def registrar_producto(productos, pedido, codigo, cantidad):
-    # Consultar si el código existe en el diccionario
+    
     if codigo not in productos:
         print("Producto no encontrado.")
         return
 
-    # Verificar que la cantidad sea mayor que cero
     if cantidad <= 0:
         print("Cantidad no valida.")
         return
 
     nombre, precio, existencias = productos[codigo]
 
-    # Comprobar que existan suficientes unidades
+  
     if cantidad > existencias:
         print("No hay suficientes unidades disponibles.")
         return
 
-    # Calcular el subtotal
+    
     subtotal = precio * cantidad
 
-    # Agregar la tupla al pedido
     pedido.append((codigo, nombre, cantidad, subtotal))
 
-    # Actualizar las existencias (las tuplas son inmutables,
-    # por eso se crea una nueva tupla y se reemplaza en el diccionario)
+   
     productos[codigo] = (nombre, precio, existencias - cantidad)
 
     print(f"Se agregaron {cantidad} x {nombre} al pedido. Subtotal: ${subtotal}")
 
 
-# --------------------------------------------------------------
-# 6. FUNCIÓN PARA CALCULAR EL TOTAL
-# --------------------------------------------------------------
+
 def calcular_total(pedido):
     total = 0
     for item in pedido:
-        total += item[3]  # posición 3 = subtotal
+        total += item[3]  
     return total
 
 
-# --------------------------------------------------------------
-# Función auxiliar: leer números enteros sin que el programa se caiga
-# --------------------------------------------------------------
+
 def leer_entero(mensaje):
     texto = input(mensaje)
     if texto.lstrip("-").isdigit():
@@ -104,9 +73,7 @@ def leer_entero(mensaje):
     return None
 
 
-# --------------------------------------------------------------
-# Función auxiliar: mostrar el resumen final del pedido
-# --------------------------------------------------------------
+
 def mostrar_resumen(pedido):
     total = calcular_total(pedido)
 
@@ -129,9 +96,7 @@ def mostrar_resumen(pedido):
     print("========================================")
 
 
-# --------------------------------------------------------------
-# 5. CICLO PARA REGISTRAR EL PEDIDO (menú principal)
-# --------------------------------------------------------------
+
 def main():
     opcion = 0
     while opcion != 3:
